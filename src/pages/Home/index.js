@@ -23,7 +23,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <C.Container>
+    <div>
       <C.Retangulo1 />
       <C.Retangulo2 />
       <div>
@@ -57,42 +57,43 @@ const Home = () => {
         <C.Administrador>Administrador</C.Administrador>
       </C.Nav>
       
-      <C.TextoPag>
-        <C.TextoObjetos>Objetos</C.TextoObjetos>
-        <C.BotaoInvisivel>
-          <C.Icone2 src={icone2} alt="Ícone" />&nbsp; Itens encontrados
-        </C.BotaoInvisivel>
-      </C.TextoPag>
-      <C.NovoItem onClick={() => navigate("/cadastro-item")}>
-        &nbsp;&nbsp;&nbsp;&nbsp;Cadastrar novo item &nbsp;&nbsp;&nbsp;<C.Icone3 src={icone3} alt="Ícone" />
-      </C.NovoItem>
+        <C.TextoPag>
+          <C.BotaoInvisivel>
+            <C.Icone2 src={icone2} alt="Ícone" /> Itens encontrados
+          </C.BotaoInvisivel>
+        </C.TextoPag>
+        <C.NovoItem onClick={() => navigate("/cadastro-item")}>
+          &nbsp;&nbsp;&nbsp;&nbsp;Cadastrar novo item &nbsp;&nbsp;&nbsp;<C.Icone3 src={icone3} alt="Ícone" />
+        </C.NovoItem>
+
+      
       <C.Galeria>
-        <a href="GaleriaItens.html">
+        <a onClick={() => navigate("/smartphones")}>
           <C.Itens src={item1} alt="Item 1" />
         </a>
-        <a href="GaleriaItens.html">
+        <a onClick={() => navigate("/Materiais")}>
           <C.Itens src={item2} alt="Item 2" />
         </a>
-        <a href="GaleriaItens.html">
+        <a onClick={() => navigate("/Copos")}>
           <C.Itens src={item3} alt="Item 3" />
         </a>
-        <a href="GaleriaItens.html">
+        <a onClick={() => navigate("/Acessorios")}>
           <C.Itens src={item4} alt="Item 4" />
         </a>
-        <a href="GaleriaItens.html">
+        <a onClick={() => navigate("/Roupas")}>
           <C.Itens src={item5} alt="Item 5" />
         </a>
-        <a href="GaleriaItens.html">
+        <a onClick={() => navigate("/Outros")}>
           <C.Itens src={item8} alt="Item 8" />
         </a>
-        <a href="GaleriaItens.html">
+        <a onClick={() => navigate("/Documentos")}>
           <C.Itens src={item7} alt="Item 7" />
         </a>
-        <a href="GaleriaItens.html">
+        <a onClick={() => navigate("/Carregadores")}>
           <C.Itens src={item6} alt="Item 6" />
         </a>
       </C.Galeria>
-    </C.Container>
+    </div>
   );
 };
 

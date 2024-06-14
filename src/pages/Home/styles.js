@@ -54,7 +54,7 @@ export const BotObjetos = styled.button`
 
 export const TextoPag = styled.div`
   top: 40px;
-  right: 750px;
+  left: 430px;
   position: absolute;
 `;
 
@@ -74,6 +74,7 @@ export const BotaoInvisivel = styled.button`
   font-size: 30px;
   background-color: rgba(0, 0, 0, 0);
 `;
+
 
 export const NovoItem = styled.a`
   right: 250px;

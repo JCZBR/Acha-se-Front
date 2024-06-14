@@ -12,6 +12,18 @@ export const Retangulo1 = styled.div`
   top: -150px;
   left: 250px;
 `;
+export const Itens = styled.img`
+  width: 190px;
+  height: 190px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  padding-top: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
 
 export const Retangulo2 = styled.div`
   width: 70px;
@@ -119,13 +131,13 @@ export const Galeria = styled.div`
   position: absolute;
   background-color: white;
   right: 250px;
-  width: 870px;
-  height: 310px;
+  width: 800px;
+  height: 650px;
   top: 250px;
-  text-align: left;
+  column-count: 3;
+  text-align: center;
   border-radius: 10px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
- 
 `;
 
 
@@ -152,10 +164,10 @@ export const FormDropDawn = styled.select`
 `;
 
 export const BotaoImagem = styled.a`
-  right: 300px;
+  right: 250px;
   height: 35px;
   position: absolute;
-  top: 480px;
+  top: 380px;
   background-color: rgb(16, 74, 139);
   width: 302px;
   height: 40px;
@@ -175,7 +187,7 @@ export const BotaoItem = styled.a`
   right: 700px;
   height: 35px;
   position: absolute;
-  top: 480px;
+  top: 380px;
   background-color: rgb(16, 74, 139);
   width: 302px;
   height: 40px;
