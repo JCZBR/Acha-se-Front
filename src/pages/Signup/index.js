@@ -7,6 +7,8 @@ import useAuth from "../../hooks/useAuth";
 import Logo from "../../images/image.png"
 
 const Signup = () => {
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [emailConf, setEmailConf] = useState("");
   const [senha, setSenha] = useState("");
@@ -15,8 +17,8 @@ const Signup = () => {
 
   const { signup } = useAuth();
 
-  const handleSignup = () => {
-    if (!email | !emailConf | !senha) {
+  const handleSignup = async () => {
+    if (!email || !emailConf || !name || !phoneNumber || !senha) {
       setError("Preencha todos os campos");
       return;
     } else if (email !== emailConf) {
@@ -24,23 +26,33 @@ const Signup = () => {
       return;
     }
 
-    const res = signup(email, senha);
-
-    if (res) {
-      setError(res);
-      return;
+    try {
+      await signup(name, phoneNumber, email, senha);
+      alert("Usuário cadatrado com sucesso!");
+      navigate("/");
+    } catch (error) {
+      setError(error);
     }
-
-    alert("Usuário cadatrado com sucesso!");
-    navigate("/");
   };
 
   return (
     <C.Container>
-            <C.ImageContainer>
-      <img src={Logo} alt="logo"/>
+      <C.ImageContainer>
+        <img src={Logo} alt="logo" />
       </C.ImageContainer>
       <C.Content>
+        <Input
+          type="name"
+          placeholder="Digite seu nome"
+          value={name}
+          onChange={(e) => [setName(e.target.value), setError("")]}
+        />
+        <Input
+          type="phoneNumber"
+          placeholder="Digite seu celular"
+          value={phoneNumber}
+          onChange={(e) => [setPhoneNumber(e.target.value), setError("")]}
+        />
         <Input
           type="email"
           placeholder="Digite seu E-mail"

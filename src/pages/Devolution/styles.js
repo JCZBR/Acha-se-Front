@@ -143,6 +143,7 @@ export const Form2 = styled.div`
 export const FormCriarItem = styled.input`
   height: 30px;
   border-radius: 10px;
+  padding: 5px;
 `;
 
 

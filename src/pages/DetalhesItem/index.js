@@ -1,7 +1,7 @@
 // CadastroItem/index.js
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useAuth from "../../hooks/useAuth";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   Retangulo1,
   Retangulo2,
@@ -20,7 +20,6 @@ import {
   Form,
   FormCriarItem,
   FormDropDawn,
-  BotaoImagem,
   BotaoItem,
   Form2
 } from './styles';
@@ -31,53 +30,35 @@ import iconsair from '../../images/iconsair.png';
 import icone2 from '../../images/icone2.png';
 import { http } from '../../api/server';
 
-const CadastroItem = () => {
+const DetalhesItem = () => {
   const { signout } = useAuth(); // Utilize useAuth aqui
   const navigate = useNavigate();
 
-  const fileInputRef = useRef(null)
+  const params = useParams()
 
-  const [formData, setFormData] = useState({
-    name: "",
-    color: "",
-    value: "",
-    brand: "",
-    date: "",
-    local: "",
-    category: "",
-  })
+  const [item, setItem] = useState()
 
-  const [file, setFile] = useState();
-
-  function handleChange(e) {
-    setFile(e.target.files[0]);
-  }
-
-  const createObject = async () => {
-    const body = new FormData()
-
-    for await (const key of Object.keys(formData)){
-      body.append(key, formData[key])
-    }
-
-    body.append('file', file);
-  
-    for (var pair of body.entries()) {
-      console.log(pair[0]+ ', ' + pair[1]); 
-  }
-
-    const data = await http.post("/objects", body, {
-      headers: {
-        "Content-Type": "multipart/form-data"
-      }
-    })
+  const fetchItem = async () => {
+    const { data } = await http.get(`/objects/${params.objectId}`)
     if (!data) {
-      alert("Erro ao cadastrar objeto!")
+      alert("erro ao buscar item")
+      navigate('/')
       return
     }
-    
-    navigate('/')
+
+    setItem(data)
   }
+
+  useEffect(() => {
+    fetchItem()
+  }, [])
+
+
+
+  if(!item){
+    return
+  }
+
   return (
     <>
       <Retangulo1 />
@@ -124,12 +105,12 @@ const CadastroItem = () => {
             <br />
             Nome:<br />
             <br />
-            <FormCriarItem onChange={(e) => setFormData({ ...formData, name: e.target.value })} type="text" />
+            <FormCriarItem disabled value={item.name} type="text" />
             <br />
             <br />
             Categoria:<br />
             <br />
-            <FormDropDawn onChange={(e) => setFormData({ ...formData, category: e.target.value })} className="FormDropDawn">
+            <FormDropDawn disabled value={item.category} className="FormDropDawn">
               <option value="ELETRONIC">
                 Smartphones e Eletrônicos
               </option>
@@ -152,12 +133,12 @@ const CadastroItem = () => {
             <br />
             Cor: <br />
             <br />
-            <FormCriarItem onChange={(e) => setFormData({ ...formData, color: e.target.value })} type="text" className="FormCriarItem" />
+            <FormCriarItem disabled value={item.color} type="text" className="FormCriarItem disabled" />
             <br />
             <br />
             Valor estimado: <br />
             <br />
-            <FormCriarItem onChange={(e) => setFormData({ ...formData, value: e.target.value })} type="text" className="FormCriarItem" />
+            <FormCriarItem disabled value={item.value} type="text" className="FormCriarItem disabled" />
             <br />
           </Form2>
 
@@ -165,12 +146,12 @@ const CadastroItem = () => {
             <br />
             Data e hora: <br />
             <br />
-            <FormCriarItem onChange={(e) => setFormData({ ...formData, date: new Date(e.target.value).toISOString() })} type="datetime-local" className="FormCriarItem" />
+            <FormCriarItem disabled defaultValue={item.date.substring(0,10)} type="date" className="FormCriarItem disabled" />
             <br />
-            <br /> 
+            <br />
             Marca: <br />
             <br />
-            <FormCriarItem onChange={(e) => setFormData({ ...formData, brand: e.target.value })} type="text" className="FormCriarItem" />
+            <FormCriarItem disabled value={item.brand} type="text" className="FormCriarItem disabled" />
             <br />
 
           </Form2>
@@ -179,25 +160,15 @@ const CadastroItem = () => {
             <br />
             Local encontrado: <br />
             <br />
-            <FormCriarItem onChange={(e) => setFormData({ ...formData, local: e.target.value })} type="text" className="FormCriarItem" />
+            <FormCriarItem disabled value={item.local} type="text" className="FormCriarItem disabled" />
             <br />
-            <br />
-            Imagem: <br />
-            <br />
-            {file && <img style={{ width: "148px", height: "64px" }} src={URL.createObjectURL(file)} alt="" />}
-            <br />
-
           </Form2>
 
         </Form >
       </Galeria>
-      <div style={{ display: "flex", marginTop: "20px" }}>
-        <input onChange={handleChange} ref={fileInputRef} type="file" style={{ display: 'none' }} />
-        <BotaoImagem onClick={() => fileInputRef.current.click()} >Anexar imagem</BotaoImagem>
-        <BotaoItem className="botaoitem" onClick={createObject}>Adicionar Item</BotaoItem>
-      </div>
+      <BotaoItem className="botaoitem" onClick={() => navigate(`/devolution/${params.objectId}`)}>Marcar devolução</BotaoItem>
     </>
   );
 };
 
-export default CadastroItem;
+export default DetalhesItem;

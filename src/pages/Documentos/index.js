@@ -1,5 +1,5 @@
 // CadastroItem/index.js
-import React from 'react';
+import React, { useState } from 'react';
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from 'react-router-dom';
 import item1 from '../../images/Eletronico1.PNG';
@@ -37,6 +37,7 @@ import icone2 from '../../images/icone2.png';
 const CadastroItem = () => {
   const { signout } = useAuth(); // Utilize useAuth aqui
   const navigate = useNavigate(); // Utilize useNavigate se estiver usando React Router
+
   return (
     <>
       <Retangulo1 />

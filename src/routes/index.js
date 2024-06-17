@@ -14,6 +14,8 @@ import Materiais from "../pages/Materiais";
 import Documentos from "../pages/Documentos"; 
 import Acessorios from "../pages/Acessorios"; 
 import VizualizarItem from "../pages/VizualizarItem"; 
+import Devolution from "../pages/Devolution";
+import DetalhesItem from "../pages/DetalhesItem";
 
 const Private = ({ Item }) => {
   const { signed } = useAuth();
@@ -26,8 +28,10 @@ const RoutesApp = () => {
     <BrowserRouter>
       <Fragment>
         <Routes>
-          <Route exact path="/home" element={<Private Item={Home} />} />
-          <Route exact path="/cadastro-item" element={<Private Item={CadastroItem} />} /> {/* Rota para CadastroItem */}
+          <Route exact path="/" element={<Private Item={Home} />} />
+          <Route exact path="/cadastro-item" element={<Private Item={CadastroItem} />} />
+          <Route exact path="/devolution/:objectId" element={<Private Item={Devolution} />} />
+          <Route exact path="/item/:objectId" element={<Private Item={DetalhesItem} />} />
           <Route exact path="/Outros" element={<Private Item={Outros} />} />
           <Route exact path="/Copos" element={<Private Item={Copos} />} />
           <Route exact path="/Carregadores" element={<Private Item={Carregadores} />} />
@@ -37,7 +41,7 @@ const RoutesApp = () => {
           <Route exact path="/smartphones" element={<Private Item={Smartphones} />} />
           <Route exact path="/Acessorios" element={<Private Item={Acessorios} />} />
           <Route exact path="/VizualizarItem" element={<Private Item={VizualizarItem} />} />
-          <Route exact path="/" element={<Signin />} />
+          <Route exact path="/signin" element={<Signin />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route path="*" element={<Signin />} />
         </Routes>
