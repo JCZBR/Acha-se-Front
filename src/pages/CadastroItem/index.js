@@ -140,7 +140,7 @@ const CadastroItem = () => {
               <option value="ACCESSORIES">Acessórios</option>
               <option value="CLOTHES">Roupas</option>
               <option value="CHARGERS_AND_CABLES">
-                Materiais e mochilas
+                Carregadores e cabos 
               </option>
               <option value="DOCUMENTS">Documentos</option>
               <option value="OTHERS">Outros</option>
