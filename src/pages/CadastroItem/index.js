@@ -44,7 +44,7 @@ const CadastroItem = () => {
     brand: "",
     date: "",
     local: "",
-    category: "",
+    category: "ELETRONIC",
   })
 
   const [file, setFile] = useState();
@@ -129,7 +129,7 @@ const CadastroItem = () => {
             <br />
             Categoria:<br />
             <br />
-            <FormDropDawn onChange={(e) => setFormData({ ...formData, category: e.target.value })} className="FormDropDawn">
+            <FormDropDawn defaultValue="ELETRONIC" onChange={(e) => setFormData({ ...formData, category: e.target.value })} className="FormDropDawn">
               <option value="ELETRONIC">
                 Smartphones e Eletrônicos
               </option>

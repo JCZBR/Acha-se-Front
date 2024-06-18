@@ -1,5 +1,5 @@
 // CadastroItem/index.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from 'react-router-dom';
 import item1 from '../../images/Eletronico1.PNG';
@@ -26,17 +26,36 @@ import {
   BotaoInvisivel,
   Galeria,
   Itens,
-  
+
 } from './styles';
 import logo from '../../images/Achese3.png';
 import icone from '../../images/icone.png';
 import fotoadmin from '../../images/fotoadmin.PNG';
 import iconsair from '../../images/iconsair.png';
 import icone2 from '../../images/icone2.png';
+import { http } from '../../api/server';
 
 const CadastroItem = () => {
   const { signout } = useAuth(); // Utilize useAuth aqui
-  const navigate = useNavigate(); // Utilize useNavigate se estiver usando React Router
+  const navigate = useNavigate(); // Utilize useNavigate se estiver usando React Router\
+
+  const [items, setItems] = useState([])
+
+  const fetchItems = async () => {
+    const { data } = await http.get(`/objects?category=ELETRONIC`)
+    if (!data) {
+      alert("erro ao buscar items")
+      navigate('/')
+      return
+    }
+
+    setItems(data)
+  }
+
+  useEffect(() => {
+    fetchItems()
+  }, [])
+
   return (
     <>
       <Retangulo1 />
@@ -78,35 +97,18 @@ const CadastroItem = () => {
       </TextoPag>
 
       <Galeria>
-       
-        <a >
-          <Itens src={item1} alt="Item 1" />
-        </a>
-        <a>
-          <Itens src={item2} alt="Item 2" />
-        </a>
-        <a>
-          <Itens src={item3} alt="Item 3" />
-        </a>
-        <a >
-          <Itens src={item4} alt="Item 4" />
-        </a>
-        <a >
-          <Itens src={item5} alt="Item 5" />
-        </a>
-        <a >
-          <Itens src={item8} alt="Item 8" />
-        </a>
-        <a >
-          <Itens src={item7} alt="Item 7" />
-        </a>
-        <a >
-          <Itens src={item6} alt="Item 6" />
-        </a>
-         
-       
+
+        {items.map(item => {
+          return (
+            <a onClick={() => navigate(`/item/${item.id}`)}>
+              <Itens src={item.imageUrl} alt="Item 1" />
+            </a>
+          )
+        })}
+
+
       </Galeria>
-     
+
     </>
   );
 };
