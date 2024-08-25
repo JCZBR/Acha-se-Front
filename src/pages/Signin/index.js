@@ -23,7 +23,11 @@ const Signin = () => {
     try {
       await signin(email, senha);
     } catch (error) {
-      setError(error);
+        if(error.response.status===400){
+          setError("E-mail ou senha invalidos");
+            return
+        }
+        setError("Ocorreu um erro inesperado")
     }
   };
 

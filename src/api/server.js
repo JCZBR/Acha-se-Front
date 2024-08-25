@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const http = axios.create({ baseURL: "https://acha-se-back-end.onrender.com"})
+export const http = axios.create({ baseURL: "http://localhost:8080"})
 
 http.interceptors.request.use(
   (config) => {
