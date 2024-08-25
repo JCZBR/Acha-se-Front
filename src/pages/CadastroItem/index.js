@@ -56,7 +56,7 @@ const CadastroItem = () => {
   const createObject = async (event) => {
     event.preventDefault()
     if (!file){
-      alert("Insira o arquivo de imagem ")
+    alert("Insira o arquivo de imagem ")
       return
     }
     const body = new FormData()
@@ -198,7 +198,7 @@ const CadastroItem = () => {
       </Galeria>
       <div style={{ display: "flex", marginTop: "20px" }}>
         <input onChange={handleChange} ref={fileInputRef} type="file" style={{ display: 'none' }} />
-        <BotaoImagem onClick={() => fileInputRef.current.click()} >Anexar imagem</BotaoImagem>
+        <BotaoImagem type="button" onClick={() => fileInputRef.current.click()} >Anexar imagem</BotaoImagem>
         <BotaoItem type="submit" className="botaoitem">Adicionar Item</BotaoItem>
       </div>
     </form>
