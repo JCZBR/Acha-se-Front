@@ -171,7 +171,7 @@ export const BotaoImagem = styled.button`
   cursor: pointer;
 `;
 
-export const BotaoItem = styled.a`
+export const BotaoItem = styled.button`
   right: 700px;
   height: 35px;
   position: absolute;

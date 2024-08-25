@@ -53,7 +53,12 @@ const CadastroItem = () => {
     setFile(e.target.files[0]);
   }
 
-  const createObject = async () => {
+  const createObject = async (event) => {
+    event.preventDefault()
+    if (!file){
+      alert("Insira o arquivo de imagem ")
+      return
+    }
     const body = new FormData()
 
     for await (const key of Object.keys(formData)){
@@ -79,7 +84,7 @@ const CadastroItem = () => {
     navigate('/')
   }
   return (
-    <>
+    <form onSubmit={createObject}>
       <Retangulo1 />
       <Retangulo2 />
       <div>
@@ -124,12 +129,12 @@ const CadastroItem = () => {
             <br />
             Nome:<br />
             <br />
-            <FormCriarItem onChange={(e) => setFormData({ ...formData, name: e.target.value })} type="text" />
+            <FormCriarItem required onChange={(e) => setFormData({ ...formData, name: e.target.value })} type="text" />
             <br />
             <br />
             Categoria:<br />
             <br />
-            <FormDropDawn defaultValue="ELETRONIC" onChange={(e) => setFormData({ ...formData, category: e.target.value })} className="FormDropDawn">
+            <FormDropDawn required defaultValue="ELETRONIC" onChange={(e) => setFormData({ ...formData, category: e.target.value })} className="FormDropDawn">
               <option value="ELETRONIC">
                 Smartphones e Eletrônicos
               </option>
@@ -152,12 +157,12 @@ const CadastroItem = () => {
             <br />
             Cor: <br />
             <br />
-            <FormCriarItem onChange={(e) => setFormData({ ...formData, color: e.target.value })} type="text" className="FormCriarItem" />
+            <FormCriarItem required onChange={(e) => setFormData({ ...formData, color: e.target.value })} type="text" className="FormCriarItem" />
             <br />
             <br />
             Valor estimado: <br />
             <br />
-            <FormCriarItem onChange={(e) => setFormData({ ...formData, value: e.target.value })} type="text" className="FormCriarItem" />
+            <FormCriarItem required onChange={(e) => setFormData({ ...formData, value: e.target.value })} type="text" className="FormCriarItem" />
             <br />
           </Form2>
 
@@ -165,12 +170,12 @@ const CadastroItem = () => {
             <br />
             Data e hora: <br />
             <br />
-            <FormCriarItem onChange={(e) => setFormData({ ...formData, date: new Date(e.target.value).toISOString() })} type="datetime-local" className="FormCriarItem" />
+            <FormCriarItem required onChange={(e) => setFormData({ ...formData, date: new Date(e.target.value).toISOString() })} type="datetime-local" className="FormCriarItem" />
             <br />
             <br /> 
             Marca: <br />
             <br />
-            <FormCriarItem onChange={(e) => setFormData({ ...formData, brand: e.target.value })} type="text" className="FormCriarItem" />
+            <FormCriarItem required onChange={(e) => setFormData({ ...formData, brand: e.target.value })} type="text" className="FormCriarItem" />
             <br />
 
           </Form2>
@@ -179,7 +184,7 @@ const CadastroItem = () => {
             <br />
             Local encontrado: <br />
             <br />
-            <FormCriarItem onChange={(e) => setFormData({ ...formData, local: e.target.value })} type="text" className="FormCriarItem" />
+            <FormCriarItem required onChange={(e) => setFormData({ ...formData, local: e.target.value })} type="text" className="FormCriarItem" />
             <br />
             <br />
             Imagem: <br />
@@ -194,9 +199,9 @@ const CadastroItem = () => {
       <div style={{ display: "flex", marginTop: "20px" }}>
         <input onChange={handleChange} ref={fileInputRef} type="file" style={{ display: 'none' }} />
         <BotaoImagem onClick={() => fileInputRef.current.click()} >Anexar imagem</BotaoImagem>
-        <BotaoItem className="botaoitem" onClick={createObject}>Adicionar Item</BotaoItem>
+        <BotaoItem type="submit" className="botaoitem">Adicionar Item</BotaoItem>
       </div>
-    </>
+    </form>
   );
 };
 
