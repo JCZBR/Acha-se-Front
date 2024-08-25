@@ -31,7 +31,11 @@ const Signup = () => {
       alert("Usuário cadatrado com sucesso!");
       navigate("/");
     } catch (error) {
-      setError(error);
+      if(error.response.status===400){
+        setError("E-mail já cadastrado");
+          return
+      }
+      setError("Ocorreu um erro inesperado")
     }
   };
 
